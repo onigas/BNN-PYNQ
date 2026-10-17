@@ -13,17 +13,28 @@ We support 3 boards for hardware acceleration which are Pynq-Z1, Pynq-Z2 and Ult
 Note, this repository has now been archived and is no longer being actively maintained.
 If you are relying on this repository, we strongly recommend you switch to the [FINN compiler](https://github.com/xilinx/finn).
 
-## Supplementary teaching labs
+## Notebook execution order
 
-These labs extend the original Xilinx examples using the existing pretrained models.
+Run the notebooks in the following order. All ten notebooks are in the same `notebooks/` directory.
 
-| Lab | Notebook | Description |
-| --- | --- | --- |
-| 10 | [Live CIFAR-10 webcam classification](notebooks/additional_labs/10_CIFAR10_Live_Webcam.ipynb) | Continuous USB-camera capture with CNV-W1A1 on the FPGA; accelerator timing, Python call timing, and application FPS. |
+| Order | Notebook |
+| --- | --- |
+| 1 | [01_CNV-BNN_Cifar10.ipynb](notebooks/01_CNV-BNN_Cifar10.ipynb) |
+| 2 | [02_CNV-QNN_Cifar10.ipynb](notebooks/02_CNV-QNN_Cifar10.ipynb) |
+| 3 | [03_CNV-QNN_Cifar10_Testset.ipynb](notebooks/03_CNV-QNN_Cifar10_Testset.ipynb) |
+| 4 | [04_CNV-QNN_Cifar10_Webcam.ipynb](notebooks/04_CNV-QNN_Cifar10_Webcam.ipynb) |
+| 5 | [05_LFC-QNN_MNIST.ipynb](notebooks/05_LFC-QNN_MNIST.ipynb) |
+| 6 | [06_LFC-BNN_MNIST_Webcam.ipynb](notebooks/06_LFC-BNN_MNIST_Webcam.ipynb) |
+| 7 | [07_LFC-BNN_Chars_Webcam.ipynb](notebooks/07_LFC-BNN_Chars_Webcam.ipynb) |
+| 8 | [08_CNV-BNN_Road-Signs.ipynb](notebooks/08_CNV-BNN_Road-Signs.ipynb) |
+| 9 | [09_CNV-BNN_SVHN.ipynb](notebooks/09_CNV-BNN_SVHN.ipynb) |
+| 10 | [10_CIFAR10_Live_Webcam.ipynb](notebooks/10_CIFAR10_Live_Webcam.ipynb) |
 
-For lab 10, first run the original CIFAR-10 example successfully. Download the notebook into the board's Jupyter folder and run its cells in order. The default session lasts 30 seconds; use **Kernel → Interrupt** to stop sooner. No package reinstallation is needed. Shut down other camera/BNN kernels first.
+Notebook 10 extends the original Xilinx examples with continuous USB-camera capture using the pretrained CNV-W1A1 model on the FPGA. It displays accelerator timing, Python call timing, and application FPS.
 
-The notebook includes a central crop, an enlarged 32 × 32 input view, camera cleanup, and student experiments. Code and camera cleanup paths have been checked with simulated devices; physical PYNQ/C270 validation is still required.
+For notebook 10, first run notebook 01 successfully. Download the notebook into the board's Jupyter folder and run its cells in order. The default session lasts 30 seconds; use **Kernel → Interrupt** to stop sooner. No package reinstallation is needed. Shut down other camera/BNN kernels first.
+
+The live notebook includes a central crop, an enlarged 32 × 32 input view, camera cleanup, and student experiments. Code and camera cleanup paths have been checked with simulated devices; physical PYNQ/C270 validation is still required.
 
 ## Citation
 If you find BNN-PYNQ useful, please cite the <a href="https://arxiv.org/abs/1612.07119" target="_blank">FINN paper</a>:

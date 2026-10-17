@@ -1,0 +1,31 @@
+name: Prepare CIFAR-10 test data
+on:
+  push:
+    branches: [master]
+    paths: ['.github/workflows/prepare-cifar10-test.yml']
+permissions:
+  contents: write
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download and verify CIFAR-10 test data
+        shell: bash
+        run: |
+          curl --fail --location --retry 2 --max-time 300 --output /tmp/cifar.tar.gz https://data.brainchip.com/dataset-mirror/cifar10/cifar-10-binary.tar.gz
+          echo "c32a1d4ab5d03f1284b67883e8d87530  /tmp/cifar.tar.gz" | md5sum --check
+          mkdir -p notebooks/datasets/cifar10
+          tar -xOf /tmp/cifar.tar.gz cifar-10-batches-bin/test_batch.bin > notebooks/datasets/cifar10/test_batch.bin
+          echo "8e2eb146ae340b09e24670f29cabc6326dba54da8789dab6768acf480273f65b  notebooks/datasets/cifar10/test_batch.bin" | sha256sum --check
+          test "$(stat -c%s notebooks/datasets/cifar10/test_batch.bin)" = 30730000
+      - name: Commit verified test batch
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add notebooks/datasets/cifar10/test_batch.bin
+          git diff --cached --quiet && exit 0
+          git commit -m "Add verified CIFAR-10 test batch for direct lab downloads"
+          git push origin HEAD:master

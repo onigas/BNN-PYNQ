@@ -15,7 +15,7 @@ If you are relying on this repository, we strongly recommend you switch to the [
 
 ## Notebook execution order
 
-Run the notebooks in the following order. All ten notebooks are in the same `notebooks/` directory.
+Run the notebooks in the following order. All eleven notebooks are in the same `notebooks/` directory.
 
 | Order | Notebook |
 | --- | --- |
@@ -29,12 +29,15 @@ Run the notebooks in the following order. All ten notebooks are in the same `not
 | 8 | [08_CNV-BNN_Road-Signs.ipynb](notebooks/08_CNV-BNN_Road-Signs.ipynb) |
 | 9 | [09_CNV-BNN_SVHN.ipynb](notebooks/09_CNV-BNN_SVHN.ipynb) |
 | 10 | [10_CIFAR10_Live_Webcam.ipynb](notebooks/10_CIFAR10_Live_Webcam.ipynb) |
+| 11 | [11_GTSRB_Webcam.ipynb](notebooks/11_GTSRB_Webcam.ipynb) |
 
 Notebook 10 extends the original Xilinx examples with continuous USB-camera capture using the pretrained CNV-W1A1 model on the FPGA. It displays accelerator timing, Python call timing, and application FPS.
 
 For notebook 10, first run notebook 01 successfully. Download the notebook into the board's Jupyter folder and run its cells in order. The default session lasts 30 seconds; use **Kernel → Interrupt** to stop sooner. No package reinstallation is needed. Shut down other camera/BNN kernels first.
 
 The live notebook includes a central crop, an enlarged 32 × 32 input view, camera cleanup, and student experiments. Code and camera cleanup paths have been checked with simulated devices; physical PYNQ/C270 validation is still required.
+
+Notebook 11 uses the existing `road-signs` CNV-W1A1 FPGA model with 43 traffic-sign classes plus a “Not a roadsign” class. It starts with two file-based reference checks, then classifies the central region of a USB-camera image. Use printed signs or a phone display, leaving the PC screen for Jupyter. Run the cells in order; the camera starts only in section 6 and stops after 30 seconds or 300 frames. Use **Kernel → Interrupt** to stop early. Camera/FPGA validation is required on the board.
 
 ## Citation
 If you find BNN-PYNQ useful, please cite the <a href="https://arxiv.org/abs/1612.07119" target="_blank">FINN paper</a>:

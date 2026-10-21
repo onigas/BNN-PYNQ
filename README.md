@@ -39,6 +39,21 @@ The live notebook includes a central crop, an enlarged 32 × 32 input view, came
 
 Notebook 11 uses the existing `road-signs` CNV-W1A1 FPGA model with 43 traffic-sign classes plus a “Not a roadsign” class. It starts with two file-based reference checks, then classifies the central region of a USB-camera image. Use printed signs or a phone display, leaving the PC screen for Jupyter. Run the cells in order; the camera starts only in section 6 and stops after 30 seconds or 300 frames. Use **Kernel → Interrupt** to stop early. Camera/FPGA validation is required on the board.
 
+## FPGA-only network benchmark
+
+[01.1 — CNV-W1A1 FPGA benchmark](notebooks/01.1_CNV-BNN_Cifar10_FPGA_Benchmark.ipynb)
+uses the existing CIFAR-10 hardware runtime; all six convolutions, two pooling operations
+and three fully connected layers run in the FPGA. Run it on PYNQ with BNN already installed,
+after shutting down other FPGA notebook kernels. No reinstall or hardware rebuild is needed.
+
+The notebook reports native `ExecAccel` timing, full API duration with prepared input,
+and image-file-to-class duration separately, using warm-up and repeated measurements.
+Native timing includes launch/polling and excludes host packing and buffer copies;
+it is not a pure FPGA cycle count. Temporary CIFAR inputs use `/dev/shm` and are removed.
+CNV scores are integer rankings, not probabilities. Historical ImageNet timings are context
+only: CIFAR-10 CNV uses a different model, input size and class count.
+Python control-flow checks use a mocked BNN interface; real hardware timing must be measured on PYNQ.
+
 ## Citation
 If you find BNN-PYNQ useful, please cite the <a href="https://arxiv.org/abs/1612.07119" target="_blank">FINN paper</a>:
 

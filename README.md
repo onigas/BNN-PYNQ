@@ -1,5 +1,25 @@
 # BNN-PYNQ PIP INSTALL Package
 
+## Important: Install BNN-PYNQ on the board before running notebooks
+
+**Cloning this repository is not enough.** The Jupyter notebooks use `import bnn`, so the `bnn` Python package must be installed **on the PYNQ-Z2 board**, not on the student's PC.
+
+On the board, open a terminal (Jupyter Terminal or SSH). **Any working directory is fine.** Run:
+
+```bash
+sudo pip3 install git+https://github.com/onigas/BNN-PYNQ.git
+```
+
+After installation, restart the Jupyter kernel and open the notebooks under `/home/xilinx/jupyter_notebooks/bnn/`. Check with:
+
+```python
+import bnn
+```
+
+**Note:** The original installation instructions were tested through PYNQ 2.5. PYNQ 3.0.1 compatibility has not been confirmed. Reinstallation may replace the contents of the Jupyter `bnn/` notebook folder; back up edited notebooks first.
+
+---
+
 This repo contains the pip install package for Quantized Neural Network (QNN) on PYNQ. 
 Two different network topologies are here included, namely CNV and LFC as described in the <a href="https://arxiv.org/abs/1612.07119" target="_blank"> FINN Paper </a>. 
 Now, there are multiple implementations available supporting different precision for weights and activation:

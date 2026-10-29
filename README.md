@@ -7,8 +7,10 @@
 On the board, open a terminal (Jupyter Terminal or SSH). **Any working directory is fine.** Run:
 
 ```bash
-sudo pip3 install git+https://github.com/onigas/BNN-PYNQ.git
+sudo -E /usr/local/share/pynq-venv/bin/python3 -m pip install --no-build-isolation git+https://github.com/onigas/BNN-PYNQ.git
 ```
+
+**Why `--no-build-isolation`?** With the default `pip3 install` command, wheel build requirements may fail with `ModuleNotFoundError: No module named 'pynq'`. Disabling build isolation lets the build use the PYNQ Python environment. This is a workaround for that error, not a guarantee of compatibility with every PYNQ release. Do not upgrade `pip` just to address this error.
 
 After installation, restart the Jupyter kernel and open the notebooks under `/home/xilinx/jupyter_notebooks/bnn/`. Check with:
 
@@ -91,14 +93,9 @@ If you find BNN-PYNQ useful, please cite the <a href="https://arxiv.org/abs/1612
 
 Please refer to PYNQ <a href="https://pynq.readthedocs.io/en/latest/getting_started.html" target="_blank"> Getting Started</a> guide to set-up your PYNQ Board.
 
-In order to install it to your PYNQ, connect to the board, open a terminal and type:
+Install the package **on the PYNQ board**, as described in [Important: Install BNN-PYNQ on the board before running notebooks](#important-install-bnn-pynq-on-the-board-before-running-notebooks). Cloning the repository alone does not install `bnn`.
 
-```
-sudo pip3 install git+https://github.com/Xilinx/BNN-PYNQ.git (on PYNQ v2.3 and later versions, tested up to v2.5)
-sudo pip3.6 install git+https://github.com/Xilinx/BNN-PYNQ.git (on PYNQ v2.2 and earlier)
-```
-
-This will install the BNN package to your board, and create a **bnn** directory in the Jupyter home area. You will find the Jupyter notebooks to test the networks in this directory.
+Installation creates a **bnn** directory in the Jupyter home area containing the example notebooks.
 
 ## Repo organization 
 
